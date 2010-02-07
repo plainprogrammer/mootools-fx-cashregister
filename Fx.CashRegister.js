@@ -28,32 +28,43 @@ Fx.CashRegister = new Class({
   Extends: Fx,
   
   initialize: function(element, options){
-    this.element = $(element);
+    this.element = this.subject = document.id(element);
     this.parent(options);
   },
   
   start: function(to){
-    if (!this.options.wait) this.cancel();
-    else if (this.timer) return this;
+    if (!this.check(to)) return this;
     
-    this.from = this.element.get('text').substring(1).toFloat();
+    this.from = this.element.get('text').substring(1).toFloat().round(2);
     this.to = to;
-		this.change = this.to - this.from;
-		this.time = $time();
-		this.timer = this.step.periodical(Math.round(1000 / this.options.fps), this);
-		this.fireEvent('onStart', this.element);
+    this.time = 0;
+		this.transition = this.getTransition();
+		this.startTimer();
+		this.onStart();
 
 		return this;
   },
   
-  increase: function(){
-    var value = this.now.toString().split('.');
-
-    var dollars = value[0];
-    var cents  = value.length == 1 ? '00' : (
-      value[1].length == 1 ? value[1] + "0" : value[1].substring(0,2)
-    );
+  //step: function(){
+  //  var time = $time();
+  //  if (time < this.time + this.options.duration){
+  //    var delta = this.transition((time - this.time) / this.options.duration);
+  //    this.set(this.compute(this.from, this.to, delta));
+  //  } else {
+  //    this.set(this.compute(this.from, this.to, 1));
+  //    this.complete();
+  //  }
+  //}
+  
+  step: function(){
+    var time = $time();
     
-    this.element.setText('$' + dollars + '.' + cents);
+    if (time < this.time + this.options.duration){
+      var delta = this.transition((time - this.time) / this.options.duration);
+      this.element.set('text', '$' + this.compute(this.from, this.to, delta).round(2));
+    } else {
+      this.element.set('text', '$' + this.compute(this.from, this.to, 1));
+      this.complete();
+    }
   }
 });
