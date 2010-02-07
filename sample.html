@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>Fx.CashRegister - Sample</title>
+  <script src="mootools.js" type="text/javascript" charset="utf-8"></script>
+	<script src="Fx.CashRegister.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+	//<![CDATA[
+	  window.addEvent('domready', function(){
+	    var total = $('total');
+	    var totalFx = new Fx.CashRegister(total, {duration: 2000});
+	    
+	    $('high').addEvent('click', function(){
+	      totalFx.start(999.99);
+	    });
+	    
+	    $('med').addEvent('click', function(){
+	      totalFx.start(499.02);
+	    });
+	    
+	    $('low').addEvent('click', function(){
+	      totalFx.start(0.02);
+	    });
+	  });
+	//]]>
+	</script>
+</head>
+<body>
+  <h1 id="total">$0.99</h1>
+  <button id="high">Change to $999.99</button>
+  <button id="med">Change to $499.02</button>
+  <button id="low">Change to $0.00</button>
+</body>
+</html>
