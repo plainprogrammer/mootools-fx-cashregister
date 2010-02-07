@@ -27,6 +27,11 @@ Example:
 Fx.CashRegister = new Class({
   Extends: Fx,
   
+  options: {
+    precision: 2,
+    prefix: '$'
+	},
+  
   initialize: function(element, options){
     this.element = this.subject = document.id(element);
     this.parent(options);
@@ -35,7 +40,11 @@ Fx.CashRegister = new Class({
   start: function(to){
     if (!this.check(to)) return this;
     
-    this.from = this.element.get('text').substring(1).toFloat().round(2);
+    var current_value = this.element.get('text');
+    current_value = current_value.substring(this.options.prefix.length);
+    current_value = current_value.toFloat().round(this.options.precision);
+    
+    this.from = current_value;
     this.to = to;
     this.time = 0;
 		this.transition = this.getTransition();
@@ -45,26 +54,9 @@ Fx.CashRegister = new Class({
 		return this;
   },
   
-  //step: function(){
-  //  var time = $time();
-  //  if (time < this.time + this.options.duration){
-  //    var delta = this.transition((time - this.time) / this.options.duration);
-  //    this.set(this.compute(this.from, this.to, delta));
-  //  } else {
-  //    this.set(this.compute(this.from, this.to, 1));
-  //    this.complete();
-  //  }
-  //}
-  
-  step: function(){
-    var time = $time();
+  set: function(now){
+    var new_value = this.options.prefix + now.round(this.options.precision);
     
-    if (time < this.time + this.options.duration){
-      var delta = this.transition((time - this.time) / this.options.duration);
-      this.element.set('text', '$' + this.compute(this.from, this.to, delta).round(2));
-    } else {
-      this.element.set('text', '$' + this.compute(this.from, this.to, 1));
-      this.complete();
-    }
+    this.element.set('text', new_value);
   }
 });

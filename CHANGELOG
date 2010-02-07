@@ -1,5 +1,11 @@
 = CHANGELOG
 
+== v2.0.0
+
+* Support for MooTools 1.2.4
+* Added prefix option, defaults to '$'.
+* Added precision option, defaults to 2.
+
 == v1.0.0
 
 * Targets MooTools v1.11
