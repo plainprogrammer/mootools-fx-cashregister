@@ -24,17 +24,19 @@ Example:
   >
   >totalFx.start(999.99);
 */
-Fx.CashRegister = Fx.Base.extend({
+Fx.CashRegister = new Class({
+  Extends: Fx,
+  
   initialize: function(element, options){
     this.element = $(element);
     this.parent(options);
   },
   
   start: function(to){
-    if (!this.options.wait) this.stop();
+    if (!this.options.wait) this.cancel();
     else if (this.timer) return this;
     
-    this.from = this.element.getText().substring(1).toFloat();
+    this.from = this.element.get('text').substring(1).toFloat();
     this.to = to;
 		this.change = this.to - this.from;
 		this.time = $time();
