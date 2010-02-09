@@ -9,7 +9,7 @@ authors:
 - James Thompson
 
 requires:
-- core/1.2.4:Fx
+- core/1.2.4: Fx
 
 provides: [Fx.CashRegister]
 
