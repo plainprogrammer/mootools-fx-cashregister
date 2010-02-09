@@ -24,13 +24,7 @@ Arguments:
     options - optional, see Options below.
     
 Options:
-  all the Fx.Base options and events.
-  
-Example:
-  >var total = $('total');
-  >var totalFx = new Fx.CashRegister(total, {duration: 2000});
-  >
-  >totalFx.start(999.99);
+  all the Fx options and events.
 */
 Fx.CashRegister = new Class({
   Extends: Fx,
