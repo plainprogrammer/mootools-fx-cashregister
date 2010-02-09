@@ -1,9 +1,17 @@
 /*
-Script: Fx.CashRegister.js
-  Contains <Fx.CashRegister>
-  
-License:
-  MIT-style license.
+---
+description: An animation effect that simulates the way numbers "roll" on old
+style cash registers or gasoline pumps.
+
+license: MIT-style
+
+authors:
+- James Thompson
+
+requires:
+- core/1.2.4:Fx
+
+provides: Fx.CashRegister
 */
 
 /*
