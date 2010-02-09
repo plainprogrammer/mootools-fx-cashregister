@@ -12,7 +12,7 @@ requires:
 - core/1.2.4:Fx
 
 provides:
-- Fx.CashRegister
+- 'Fx.CashRegister'
 
 ...
 */
